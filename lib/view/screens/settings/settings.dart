@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:saptak_music_app/view/screens/settings/privacy_policy.dart';
-import 'package:saptak_music_app/view/screens/settings/terms_and_condtn.dart';
+import 'package:material_color_gen/material_color_gen.dart';
+import 'package:saptak_music_app/view/screens/settings/widgets/about_dialog_widget.dart';
+import 'package:saptak_music_app/view/screens/settings/widgets/privacy_policy.dart';
+import 'package:saptak_music_app/view/screens/settings/widgets/settings_list_tile.dart';
+import 'package:saptak_music_app/view/screens/settings/widgets/terms_and_condtn.dart';
 
-class ScreenSettings extends StatefulWidget {
+class ScreenSettings extends StatelessWidget {
   const ScreenSettings({super.key});
-
-  @override
-  State<ScreenSettings> createState() => _ScreenSettingsState();
-}
-
-class _ScreenSettingsState extends State<ScreenSettings> {
-  // int _selectedIndex=3;
-  // final _screens = [
-  //   ScreenHome(),
-  //   ScreenFavorites(),
-  //   ScreenPlaylists(),
-  //   ScreenSettings(),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,92 +26,49 @@ class _ScreenSettingsState extends State<ScreenSettings> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(15.0),
         child: ListView(children: [
-          ListTile(
-            title: const Text(
-              'Theme',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white),
+          Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: const Color(0xFF00010A).toMaterialColor(),
+              borderRadius: BorderRadius.circular(10),
             ),
-            onTap: () {
-            },
+            child: ListTile(
+              title: const Text(
+                'Theme',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
+              ),
+              onTap: () {},
+            ),
           ),
-          ListTile(
-            title: const Text(
-              'Privacy Policy',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const PrivacyPolicy()),
-              );
-            },
+          const SizedBox(
+            height: 10,
           ),
-          ListTile(
-            title: const Text(
-              'Terms and Conditions',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const TermsAndCondition()),
-              );
-            },
+          const SettingsListTileWidget(
+            title: "Privacy Policy",
+            onPressedPage: PrivacyPolicy(),
           ),
-          ListTile(
-            title: const Text(
-              'About Us',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white),
-            ),
-            onTap: () {
-              aboutUsPopUp();
-            },
+          const SizedBox(
+            height: 10,
+          ),
+          const SettingsListTileWidget(
+            title: "Terms and Conditions",
+            onPressedPage: TermsAndCondition(),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const SettingsListTileWidget(
+            title: "About Us",
+            onPressedPage: AboutDialogWidget(),
           ),
         ]),
       ),
     );
   }
-
-  aboutUsPopUp() {
-    final widthDsp = MediaQuery.of(context).size.width;
-    final heightDsp = MediaQuery.of(context).size.height;
-    showAboutDialog(
-        context: context,
-        applicationIcon: Container(
-          height: heightDsp*0.09,
-          width: widthDsp * 0.18,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/saptak_icon.png')),
-          ),
-        ),
-        applicationName: "Saptak",
-        applicationVersion: '1.0.0',
-        applicationLegalese: 'Copyright © 2023 Saptak',
-        children: [
-          const Text(
-              "Saptak is an offline music player app which allows user to hear music from their storage and also do functions like add to favorites , create playlists , recently played , mostly played etc."),
-          SizedBox(
-            height: heightDsp*0.02,
-          ),
-          const Text("App developed by Ashish Joy.")
-        ]);
-  }
 }
+

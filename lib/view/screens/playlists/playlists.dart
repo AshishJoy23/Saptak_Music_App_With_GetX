@@ -62,9 +62,15 @@ class ScreenPlaylists extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: controller.allDbPlaylists.length,
                       itemBuilder: (context, index) {
+                        //controller.fetchCurrentPlaylistSongs(index);
                         final currentPlaylist =
                             controller.allDbPlaylists[index];
-                        return PlaylistListTileWidget(index: index, currentPlaylist: currentPlaylist, tileController: controller,);
+
+                        return PlaylistListTileWidget(
+                          index: index,
+                          currentPlaylist: currentPlaylist,
+                          tileController: controller,
+                        );
                       },
                     ),
                   ]),
@@ -74,7 +80,3 @@ class ScreenPlaylists extends StatelessWidget {
     );
   }
 }
-
-
-
-

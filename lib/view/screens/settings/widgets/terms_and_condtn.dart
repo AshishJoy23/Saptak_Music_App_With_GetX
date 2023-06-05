@@ -12,7 +12,7 @@ class TermsAndCondition extends StatelessWidget {
     final height1 = MediaQuery.of(context).size.height;
     final width1 = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 23, 63, 97),
+      backgroundColor: Colors.white.withOpacity(0.7),
       appBar: AppBar(
         automaticallyImplyLeading: true,
         centerTitle: true,
@@ -25,35 +25,29 @@ class TermsAndCondition extends StatelessWidget {
                       ),
                     ),
                     ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(width1*0.03),
-                    child: Text(message,style: const TextStyle(fontSize: 16),),
-                  ),
-                  SizedBox(
-                        height: height1*0.02,
-                      ),
-                  Padding(
-                    padding: EdgeInsets.all(width1*0.03),
-                    child: Text(message1,style: const TextStyle(fontSize: 16),),
-                  ),
-                  SizedBox(
-                        height: height1*0.02,
-                      ),
-                  Padding(
-                    padding: EdgeInsets.all(width1*0.03),
-                    child: Text(message2,style: const TextStyle(fontSize: 16),),
-                  ),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(width1*0.03),
+              child: Text(message,style: const TextStyle(fontSize: 16,color: Colors.black,),),
             ),
-          ),
-        ],
+            SizedBox(
+                  height: height1*0.02,
+                ),
+            Padding(
+              padding: EdgeInsets.all(width1*0.03),
+              child: Text(message1,style: const TextStyle(fontSize: 16,color: Colors.black,),),
+            ),
+            SizedBox(
+                  height: height1*0.02,
+                ),
+            Padding(
+              padding: EdgeInsets.all(width1*0.03),
+              child: Text(message2,style: const TextStyle(fontSize: 16,color: Colors.black,),),
+            ),
+          ],
+        ),
       ),
     );
   }

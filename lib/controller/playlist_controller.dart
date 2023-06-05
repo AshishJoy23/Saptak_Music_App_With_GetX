@@ -7,6 +7,7 @@ import '../model/db_functions.dart';
 class PlaylistController extends GetxController {
   var allDbPlaylists = <Playlists>[].obs;
   var convertPlaylistAudios = <Audio>[].obs;
+  // var currentPlaylistSongs = <AllSongs>[].obs;
 
   @override
   void onInit() {
@@ -18,6 +19,10 @@ class PlaylistController extends GetxController {
   void fetchAllPlaylists() {
     allDbPlaylists.value = playlistsBox.values.toList();
   }
+
+  // void fetchCurrentPlaylistSongs(int index){
+  //   currentPlaylistSongs.value = allDbPlaylists[index].playlistssongs!.toList();
+  // }
 
 //creating a new playlist and adding the current song in it
   void createPlaylist(AllSongs? currentSong, String textQuery) async {
@@ -48,20 +53,6 @@ class PlaylistController extends GetxController {
     }
   }
 
-//creating a new playlist without adding song in it
-  // void appbarCreatePlaylist({AllSongs? currentSong,required String textQuery}) async{
-  //   if (currentSong==null) {
-  //     await playlistsBox.add(
-  //     Playlists(
-  //       playlistname: textQuery,
-  //       playlistssongs: [],
-  //     ),
-  //   );
-  //   fetchAllPlaylists();
-  //   }
-
-  // }
-
 //adding song to the exixting playlists
   void addToPlaylist(int index, AllSongs currentSong) async {
     List<AllSongs> currentPlaylistSongs =
@@ -87,14 +78,16 @@ class PlaylistController extends GetxController {
 
 //removing song from the exixting playlists
   void removeFromPlaylist(int songIndex, int playlistIndex) async {
-    List<AllSongs> currentPlaylistSongs =
+    List<AllSongs> selectedPlaylistSongs =
         allDbPlaylists[playlistIndex].playlistssongs!.toList();
-    currentPlaylistSongs.removeAt(songIndex);
+    selectedPlaylistSongs.removeAt(songIndex);
     Playlists updatedPlaylist = Playlists(
       playlistname: allDbPlaylists[playlistIndex].playlistname,
-      playlistssongs: currentPlaylistSongs,
+      playlistssongs: selectedPlaylistSongs,
     );
-    await playlistsBox.put(playlistIndex, updatedPlaylist);
+    await playlistsBox.putAt(playlistIndex, updatedPlaylist);
+    fetchAllPlaylists();
+    //fetchCurrentPlaylistSongs(playlistIndex);
     convertPlaylistSongs(playlistIndex);
   }
 
@@ -114,10 +107,10 @@ class PlaylistController extends GetxController {
 
 //converting the songs in the current playlist to the asset audio format
   void convertPlaylistSongs(int index) {
-    List<AllSongs> currentPlaylistSongs =
+    List<AllSongs> currentPlistSongs =
         allDbPlaylists[index].playlistssongs!.toList();
     convertPlaylistAudios.clear();
-    for (var element in currentPlaylistSongs) {
+    for (var element in currentPlistSongs) {
       convertPlaylistAudios.add(
         Audio.file(
           element.songuri!,

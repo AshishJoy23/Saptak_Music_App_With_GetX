@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:saptak_music_app/view/screens/playlists/widgets/each_playlistsongs.dart';
+import 'package:on_audio_query/on_audio_query.dart';
+import 'package:saptak_music_app/view/screens/playlists/each_playlistsongs.dart';
 import 'package:saptak_music_app/view/screens/playlists/widgets/playlist_delete_button.dart';
 import 'package:saptak_music_app/view/screens/playlists/widgets/playlist_rename_button.dart';
 import '../../../../controller/playlist_controller.dart';
@@ -21,60 +22,64 @@ class PlaylistListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final widthDsp = MediaQuery.of(context).size.height;
-    return ListTile(
-      onTap: () {
-        Get.to(() => EachPlaylistSongs(
-              playlist: currentPlaylist,
-              index: index,
-            ));
-      },
-      leading: (currentPlaylist.playlistssongs!.isEmpty)
-          ? Container(
-              width: widthDsp * 0.065,
-              decoration: const BoxDecoration(
-                borderRadius:
-                    BorderRadius.all(Radius.circular(10)),
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                        'assets/images/saptak_icon.png')),
+    return Obx(() => ListTile(
+          onTap: () {
+            tileController.convertPlaylistSongs(index);
+            Get.to(
+              () => EachPlaylistSongs(
+                currentPlaylist: currentPlaylist,
+                playlistIndex: index,
               ),
-              //child: Icon(Icons.abc),
-            )
-          : ListTileLeadingWidget(
-              currentSong:
-                  currentPlaylist.playlistssongs!.first),
-      title: Text(
-        currentPlaylist.playlistname!,
-        style: const TextStyle(
-            fontSize: 20,
-            fontFamily: 'Poppins',
-            color: Colors.white),
-      ),
-      subtitle: Text(
-        (currentPlaylist.playlistssongs!.length <= 1)
-            ? '${currentPlaylist.playlistssongs!.length.toString()} Song'
-            : '${currentPlaylist.playlistssongs!.length.toString()} Songs',
-        style: const TextStyle(
-            fontSize: 16,
-            fontFamily: 'Poppins',
-            color: Colors.white),
-      ),
-      trailing: PopupMenuButton<String>(
-        color: Colors.white.withOpacity(0.7),
-        padding: const EdgeInsets.all(0.0),
-        itemBuilder: (BuildContext context) =>
-            <PopupMenuEntry<String>>[
-          PopupMenuItem<String>(
-            value: "Delete",
-            child: PlaylistDeleteButtonWidget(index: index,currentPlaylist: currentPlaylist, btnController: tileController,),
+            );
+          },
+          leading:
+              (tileController.allDbPlaylists[index].playlistssongs!.isEmpty)
+                  ? Container(
+                      width: widthDsp * 0.065,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/images/saptak_icon.png')),
+                      ),
+                    )
+                  : ListTileLeadingWidget(
+                      currentSong: tileController
+                          .allDbPlaylists[index].playlistssongs!.first),
+          title: Text(
+            currentPlaylist.playlistname!,
+            style: const TextStyle(
+                fontSize: 20, fontFamily: 'Poppins', color: Colors.white),
           ),
-          PopupMenuItem<String>(
-            value: "Rename",
-            child: PlaylistRenameButtonWidget(index: index, currentPlaylist: currentPlaylist, btnController: tileController,),
+          subtitle: Text(
+            (currentPlaylist.playlistssongs!.length <= 1)
+                ? '${currentPlaylist.playlistssongs!.length.toString()} Song'
+                : '${currentPlaylist.playlistssongs!.length.toString()} Songs',
+            style: const TextStyle(
+                fontSize: 16, fontFamily: 'Poppins', color: Colors.white),
           ),
-        ],
-      ),
-    );
+          trailing: PopupMenuButton<String>(
+            color: Colors.white.withOpacity(0.7),
+            padding: const EdgeInsets.all(0.0),
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              PopupMenuItem<String>(
+                value: "Delete",
+                child: PlaylistDeleteButtonWidget(
+                  index: index,
+                  currentPlaylist: currentPlaylist,
+                  btnController: tileController,
+                ),
+              ),
+              PopupMenuItem<String>(
+                value: "Rename",
+                child: PlaylistRenameButtonWidget(
+                  index: index,
+                  currentPlaylist: currentPlaylist,
+                  btnController: tileController,
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

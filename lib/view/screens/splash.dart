@@ -95,9 +95,6 @@ class _ScreenSplashState extends State<ScreenSplash> {
   Future<void> goToMyApp() async {
     await Future.delayed(const Duration(seconds: 2));
     Get.off(() => MyMusicApp());
-    // Navigator.of(context).pushReplacement(
-    //   MaterialPageRoute(builder: (ctx) => const MyMusicApp()),
-    // );
   }
 }
    

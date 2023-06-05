@@ -44,7 +44,6 @@ class MyMusicApp extends StatelessWidget {
           containerHeight: heightDsp * 0.075,
           itemCornerRadius: 28,
           curve: Curves.easeIn,
-          // onItemSelected: (index) => setState(() => _selectedIndex = index),
           onItemSelected: (index) => appController.changeSelectedIndex(index),
         ),
       ),

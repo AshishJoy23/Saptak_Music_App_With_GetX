@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:hive/hive.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:saptak_music_app/model/database/db_all_models.dart';
@@ -112,11 +111,3 @@ updateRecentSearches(RecentSearches song){
     recentSearchesBox.add(song); // add again the song to the recentSearchesBox
   }
 }
-
-
-
-// updateMostlyPlayed(MostlyPlayed song,int index){
-//   int count = song.count; // find the count of current song
-//   song.count= count+1; // increment by 1 and update box
-//   mostlyPlayedBox.put(index, song);
-// }

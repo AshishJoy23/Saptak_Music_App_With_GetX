@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:saptak_music_app/view/screens/nowplaying.dart';
+
+import '../screens/nowplaying/nowplaying.dart';
 
 class MiniPlayer extends StatelessWidget {
   int index;

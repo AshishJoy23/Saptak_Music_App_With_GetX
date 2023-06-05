@@ -31,6 +31,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
   @override
   void initState() {
     allDbSongs = box.values.toList();
+    suggestionList = List.from(allDbSongs);
     for (var element in searchedList) {
       convertSAudios.add(Audio.file(element.songuri.toString(),
           metas: Metas(

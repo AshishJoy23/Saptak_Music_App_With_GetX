@@ -47,7 +47,7 @@ class FavoriteListTile extends StatelessWidget {
             id: currentSong.id);
         recentlyCtrlr.updateRecentlyPlayedSongs(recentlySong);
         mostlyCtrlr.updateMostlyPlayedSongs(mostlySong);
-        audioPlayer.open(Playlist(audios: convertAudios, startIndex: index),
+        audioPlayer.open(Playlist(audios: convertAudios.reversed.toList(), startIndex: index),
             showNotification: true,
             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplugPlayOnPlug,
             loopMode: LoopMode.playlist);
