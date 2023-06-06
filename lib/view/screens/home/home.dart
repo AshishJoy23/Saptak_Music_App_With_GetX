@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saptak_music_app/controller/home_controller.dart';
 import 'package:saptak_music_app/view/screens/home/widgets/home_main_button.dart';
-import 'package:saptak_music_app/view/screens/search_screen.dart';
+import 'package:saptak_music_app/view/screens/search/search_screen.dart';
 import 'package:saptak_music_app/view/screens/home/widgets/allsongs_list.dart';
 
 class ScreenHome extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../search_screen.dart';
+import '../../search/search_screen.dart';
 
 class EachPlaylistAppbarWidget extends StatelessWidget {
   const EachPlaylistAppbarWidget({

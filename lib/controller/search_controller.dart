@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:get/get.dart';
 import 'package:saptak_music_app/model/database/db_all_models.dart';
@@ -73,24 +75,30 @@ class SearchController extends GetxController {
   }
 
   filterSearchingSongs(String textQuery) {
+    log('searching');
     isSearched.value = true;
-    List<AllSongs> allDbSongs = box.values.toList();
-    suggestionSongs.value = allDbSongs
-        .where((element) =>
-            element.songname!.toLowerCase().contains(textQuery.toLowerCase()))
-        .toList();
-    convertSuggestionAudios.clear();
-    for (var item in suggestionSongs) {
-      convertSuggestionAudios.add(
-        Audio.file(
-          item.songuri.toString(),
-          metas: Metas(
-            artist: item.artist,
-            title: item.songname,
-            id: item.id.toString(),
+    log(textQuery);
+    if (textQuery == '') {
+      suggestionSongs.value = box.values.toList();
+    } else {
+      suggestionSongs.value = box.values
+          .where((element) =>
+              element.songname!.toLowerCase().contains(textQuery.toLowerCase()))
+          .toList();
+      convertSuggestionAudios.clear();
+      for (var item in suggestionSongs) {
+        convertSuggestionAudios.add(
+          Audio.file(
+            item.songuri.toString(),
+            metas: Metas(
+              artist: item.artist,
+              title: item.songname,
+              id: item.id.toString(),
+            ),
           ),
-        ),
-      );
+        );
+      }
     }
+    log(suggestionSongs.toString());
   }
 }

@@ -30,7 +30,7 @@ class SongListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeController hController = Get.find<HomeController>();
-    final MostlyController mController = Get.put(MostlyController());
+    final MostlyController mostlyController = Get.put(MostlyController());
     final RecentlyController recentController = Get.put(RecentlyController());
     RecentlyPlayed recentlySong;
     MostlyPlayed mostlySong;
@@ -51,18 +51,27 @@ class SongListTileWidget extends StatelessWidget {
             count: 1,
             id: currentSong.id);
         recentController.updateRecentlyPlayedSongs(recentlySong);
-        mController.updateMostlyPlayedSongs(mostlySong);
+        mostlyController.updateMostlyPlayedSongs(mostlySong);
         audioPlayer.open(Playlist(audios: convertAudios, startIndex: index),
             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplugPlayOnPlug,
             loopMode: LoopMode.playlist,
             showNotification: true);
-        Get.bottomSheet(
-          Container(
-            margin: const EdgeInsets.only(bottom:  50.0),
-            child: MiniPlayer(index: index),
-          ),
+        // Get.bottomSheet(
+        //   Container(
+        //     margin: const EdgeInsets.only(bottom:  50.0),
+        //     child: MiniPlayer(index: index),
+        //   ),
+        // );
+        showBottomSheet(
+          context: context,
+          builder: (ctx) {
+            return MiniPlayer(
+              index: hController.dbAllSongs.indexWhere(
+                (element) => element.id == currentSong.id,
+              ),
+            );
+          },
         );
-
       },
       leading: ListTileLeadingWidget(
         currentSong: currentSong,

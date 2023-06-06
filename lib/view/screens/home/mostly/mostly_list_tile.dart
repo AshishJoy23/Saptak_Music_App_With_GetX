@@ -33,10 +33,15 @@ class MostlyListTileWidget extends StatelessWidget {
             showNotification: true);
         //setState(() {});
         showBottomSheet(
-            context: context,
-            builder: (context) {
-              return MiniPlayer(index: index);
-            });
+          context: context,
+          builder: (ctx) {
+            return MiniPlayer(
+              index: hController.dbAllSongs.indexWhere(
+                (element) => element.id == currentSong.id,
+              ),
+            );
+          },
+        );
       },
       leading: ListTileLeadingWidget(currentSong: currentSong,),
       title: Marquee(

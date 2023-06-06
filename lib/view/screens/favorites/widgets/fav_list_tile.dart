@@ -47,18 +47,22 @@ class FavoriteListTile extends StatelessWidget {
             id: currentSong.id);
         recentlyCtrlr.updateRecentlyPlayedSongs(recentlySong);
         mostlyCtrlr.updateMostlyPlayedSongs(mostlySong);
-        audioPlayer.open(Playlist(audios: convertAudios.reversed.toList(), startIndex: index),
+        audioPlayer.open(
+            Playlist(
+                audios: convertAudios.reversed.toList(), startIndex: index),
             showNotification: true,
             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplugPlayOnPlug,
             loopMode: LoopMode.playlist);
-        Get.bottomSheet(
-            Container(
-              margin: EdgeInsets.only(bottom: height1 * 0.075),
-              child: MiniPlayer(
-                  index: home.dbAllSongs
-                      .indexWhere((element) => element.id == currentSong.id)),
-            ),
-            useRootNavigator: false);
+        showBottomSheet(
+          context: context,
+          builder: (ctx) {
+            return MiniPlayer(
+              index: home.dbAllSongs.indexWhere(
+                (element) => element.id == currentSong.id,
+              ),
+            );
+          },
+        );
       },
       leading: ListTileLeadingWidget(currentSong: currentSong),
       title: Marquee(

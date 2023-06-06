@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saptak_music_app/controller/mostly_controller.dart';
 import 'package:saptak_music_app/view/screens/home/mostly/mostly_list_tile.dart';
-import 'package:saptak_music_app/view/screens/search_screen.dart';
+import 'package:saptak_music_app/view/screens/search/search_screen.dart';
 import '../../../widgets/empty_list_screen.dart';
 
 class ScreenMostly extends StatelessWidget {

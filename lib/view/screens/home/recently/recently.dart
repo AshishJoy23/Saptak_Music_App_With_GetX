@@ -6,7 +6,7 @@ import 'package:saptak_music_app/view/screens/home/recently/recently_list_tile.d
 import 'package:saptak_music_app/view/widgets/empty_list_screen.dart';
 import '../../../../model/database/db_all_models.dart';
 import '../../../../model/db_functions.dart';
-import 'package:saptak_music_app/view/screens/search_screen.dart';
+import 'package:saptak_music_app/view/screens/search/search_screen.dart';
 
 class ScreenRecently extends StatefulWidget {
   const ScreenRecently({super.key});
