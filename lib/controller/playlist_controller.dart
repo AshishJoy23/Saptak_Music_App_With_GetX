@@ -7,7 +7,7 @@ import '../model/db_functions.dart';
 class PlaylistController extends GetxController {
   var allDbPlaylists = <Playlists>[].obs;
   var convertPlaylistAudios = <Audio>[].obs;
-  // var currentPlaylistSongs = <AllSongs>[].obs;
+  var currentPlaylistSongs = <AllSongs>[].obs;
 
   @override
   void onInit() {
@@ -87,6 +87,7 @@ class PlaylistController extends GetxController {
     );
     await playlistsBox.putAt(playlistIndex, updatedPlaylist);
     fetchAllPlaylists();
+    currentPlaylistSongs.value = allDbPlaylists[playlistIndex].playlistssongs!;
     //fetchCurrentPlaylistSongs(playlistIndex);
     convertPlaylistSongs(playlistIndex);
   }

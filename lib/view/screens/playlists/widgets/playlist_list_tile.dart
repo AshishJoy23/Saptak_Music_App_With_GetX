@@ -24,11 +24,13 @@ class PlaylistListTileWidget extends StatelessWidget {
     final widthDsp = MediaQuery.of(context).size.height;
     return Obx(() => ListTile(
           onTap: () {
+            tileController.currentPlaylistSongs.value = tileController.allDbPlaylists[index].playlistssongs!;
             tileController.convertPlaylistSongs(index);
             Get.to(
               () => EachPlaylistSongs(
                 currentPlaylist: currentPlaylist,
                 playlistIndex: index,
+                currentPlaylistSongs: tileController.currentPlaylistSongs.value,
               ),
             );
           },
